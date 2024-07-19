@@ -1,0 +1,5 @@
+node_modules
+dist
+eslint.config.cjs
+./src/vite-env.d.ts
+vite.config.ts

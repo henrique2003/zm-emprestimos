@@ -5,6 +5,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -14,5 +17,14 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-  },
+    '@typescript-eslint/explicit-function-return-type': ['error'],
+    'quotes': ['error', 'single'],
+    'no-trailing-spaces': ['error'],
+    'eol-last': ['error', 'always'],
+    'no-multiple-empty-lines': [
+      'error',
+      { max: 1, maxEOF: 0 }
+    ],
+    '@typescript-eslint/no-unused-vars': ['error'],
+  }
 }
