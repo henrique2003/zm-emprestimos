@@ -1,1 +1,6 @@
 export * from './header/header'
+export * from './containers'
+export * from './links'
+export * from './title/title'
+export * from './forms'
+export * from './detalhe-linha/detalhe-linha'
