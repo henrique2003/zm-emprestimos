@@ -1,3 +1,7 @@
 export * from './input-text/input-text'
 export * from './input-text/input-text.types'
 export * from './input-price/input-price'
+export * from './input-cpf/input-cpf'
+export * from './input-mask/input-mask'
+export * from './input-email/input-email'
+export * from './input-password/input-password'
