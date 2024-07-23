@@ -1,5 +1,6 @@
 import { ConteudoContainer, DetalheLinha, FaleConoscoLink, InputEmail, InputPassword, NextButton, Title } from '@/components/core'
 import { useCadastroLoginViewModel } from './cadastro-login.view.model'
+import { Link } from 'react-router-dom'
 
 export const CadastroLogin: React.FC = () => {
   const { formData: { confirmarSenha, email, senha }, handleChangeFormData } = useCadastroLoginViewModel()
@@ -34,7 +35,9 @@ export const CadastroLogin: React.FC = () => {
           />
         </div>
       </form>
-      <NextButton className='mt-16 max-w-[107px]' text='Cadastrar' />
+      <Link to='/confirmacao-solicitacao'>
+        <NextButton className='mt-16 max-w-[107px]' text='Cadastrar' />
+      </Link>
       <DetalheLinha />
     </ConteudoContainer>
   )

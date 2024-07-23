@@ -1,6 +1,7 @@
 import { ConteudoContainer, DetalheLinha, FaleConoscoLink, InputCelular, InputCep, InputCpf, InputEmail, InputFile, InputOrgaoExpedidorRg, InputPrice, InputRg, InputTelefone, InputText, NextButton, Title } from '@/components/core'
 import { useCadastroDadosViewModel } from './cadastro-dados.view.model'
 import { BsAsterisk } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 export const CadastroDados: React.FC = () => {
   const { formData: {
@@ -171,7 +172,9 @@ export const CadastroDados: React.FC = () => {
           multiple
         />
       </div>
-      <NextButton className='mt-7 max-w-[107px]' text='Avançar' />
+      <Link to='/cadastrar-login'>
+        <NextButton className='mt-7 max-w-[107px]' text='Avançar' />
+      </Link>
       <DetalheLinha />
     </ConteudoContainer>
   )
