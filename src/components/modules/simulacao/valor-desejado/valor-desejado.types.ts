@@ -1,4 +1,4 @@
-import { FormError } from '@/components/core'
+import { IFormError } from '@/utils/forms/types'
 import { ChangeEvent, FormEvent } from 'react'
 
 export type ValorDesejadoForm = {
@@ -9,5 +9,5 @@ export type ValorDesejadoViewModelReturn = {
   valor: string
   handleChangeValorDesejadoForm(e: ChangeEvent<HTMLInputElement>): void
   handleSubmitValorDesejadoForm(e: FormEvent): void
-  formErros: FormError<ValorDesejadoForm>
+  formErros: IFormError<ValorDesejadoForm>
 }

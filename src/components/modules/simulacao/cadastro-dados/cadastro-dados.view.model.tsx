@@ -1,8 +1,10 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { CadastroDadosForm, CadastroDadosViewModelReturn } from './cadastro-dados.types'
+import { IFormError } from '@/utils/forms/types'
+import { validateCadastrarDadosForm } from '@/utils/forms/validations/simulacao/validate-cadastrar-dados-form'
 
 export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
-  const [formData, setFormData] = useState<CadastroDadosForm>({
+  const [cadastrarDadosform, setCadastrarDadosform] = useState<CadastroDadosForm>({
     nomeCompleto: '',
     cpf: '',
     rg: '',
@@ -25,9 +27,32 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
     documentos: []
   })
 
-  function handleChangeFormData(e: ChangeEvent<HTMLInputElement>): void {
+  const [formErros, setFormErrors] = useState<IFormError<CadastroDadosForm>>({
+    nomeCompleto: '',
+    cpf: '',
+    rg: '',
+    orgaoExpedidorRg: '',
+    telefone: '',
+    whatsApp: '',
+    email: '',
+    profissao: '',
+    empresa: '',
+    rendaMensal: '',
+    cep: '',
+    logradouro: '',
+    bairro: '',
+    numero: '',
+    complemento: '',
+    cidade: '',
+    estado: '',
+    comprovanteResidencia: '',
+    comprovanteRenda: '',
+    documentos: ''
+  })
+
+  function handleChangeCadastrarDadosForm(e: ChangeEvent<HTMLInputElement>): void {
     if (e.target.files) {
-      return setFormData(prevState => {
+      return setCadastrarDadosform(prevState => {
         return {
           ...prevState,
           [e.target.name]: e.target.files
@@ -35,7 +60,7 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
       })
     }
 
-    setFormData(prevState => {
+    setCadastrarDadosform(prevState => {
       return {
         ...prevState,
         [e.target.name]: e.target.value
@@ -43,8 +68,43 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
     })
   }
 
+  async function handleSubmitCadastroDadosForm(e: FormEvent): Promise<void> {
+    e.preventDefault()
+
+    const validate = validateCadastrarDadosForm(cadastrarDadosform)
+    if (!validate.valid) {
+      setFormErrors(validate.errors)
+      return
+    }
+
+    setFormErrors({
+      nomeCompleto: '',
+      cpf: '',
+      rg: '',
+      orgaoExpedidorRg: '',
+      telefone: '',
+      whatsApp: '',
+      email: '',
+      profissao: '',
+      empresa: '',
+      rendaMensal: '',
+      cep: '',
+      logradouro: '',
+      bairro: '',
+      numero: '',
+      complemento: '',
+      cidade: '',
+      estado: '',
+      comprovanteResidencia: '',
+      comprovanteRenda: '',
+      documentos: ''
+    })
+  }
+
   return {
-    formData,
-    handleChangeFormData
+    cadastrarDadosform,
+    handleChangeCadastrarDadosForm,
+    handleSubmitCadastroDadosForm,
+    formErros
   }
 }

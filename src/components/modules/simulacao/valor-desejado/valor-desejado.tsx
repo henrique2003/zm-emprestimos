@@ -1,4 +1,4 @@
-import { ConteudoContainer, DetalheLinha, FaleConoscoLink, InputPrice, NextButton, Title } from '@/components/core'
+import { ConteudoContainer, FaleConoscoLink, InputPrice, NextButton, Title } from '@/components/core'
 import { useValorDesejadoViewModel } from './valor-desejado-view-model'
 
 export const ValorDesejado: React.FC = () => {
@@ -27,7 +27,6 @@ export const ValorDesejado: React.FC = () => {
           type='submit'
         />
       </form>
-      <DetalheLinha />
     </ConteudoContainer>
   )
 }

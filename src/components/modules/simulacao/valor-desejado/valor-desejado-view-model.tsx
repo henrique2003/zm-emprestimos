@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { ValorDesejadoForm, ValorDesejadoViewModelReturn } from './valor-desejado.types'
 import { useNavigate } from 'react-router-dom'
-import { FormError } from '@/components/core'
+import { IFormError } from '@/utils/forms/types'
+import { validateValorDesejadoForm } from '@/utils/forms/validations/simulacao'
 
 export const useValorDesejadoViewModel = (): ValorDesejadoViewModelReturn => {
   const [valorDesejadoForm, setValorDesejadoForm] = useState<ValorDesejadoForm>({
@@ -9,7 +10,7 @@ export const useValorDesejadoViewModel = (): ValorDesejadoViewModelReturn => {
   })
   const { valor } = valorDesejadoForm
 
-  const [formErros, setFormErrors] = useState<FormError<ValorDesejadoForm>>({
+  const [formErros, setFormErrors] = useState<IFormError<ValorDesejadoForm>>({
     valor: ''
   })
 
@@ -26,11 +27,9 @@ export const useValorDesejadoViewModel = (): ValorDesejadoViewModelReturn => {
   function handleSubmitValorDesejadoForm(e: FormEvent): void {
     e.preventDefault()
 
-    if (!valor) {
-      setFormErrors({
-        valor: 'Valor solicitado inválido'
-      })
-
+    const validate = validateValorDesejadoForm(valorDesejadoForm)
+    if (!validate.valid) {
+      setFormErrors(validate.errors)
       return
     }
 

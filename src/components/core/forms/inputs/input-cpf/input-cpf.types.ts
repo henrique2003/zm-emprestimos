@@ -1,5 +1,3 @@
-import { ComponentProps } from 'react';
+import { InputTextProps } from '../input-text/input-text.types';
 
-export type InputCpfProps = ComponentProps<'input'> & {
-  required?: boolean
-}
+export type InputCpfProps = InputTextProps

@@ -18,7 +18,11 @@ export const InputText: React.FC<InputTextProps> = forwardRef<HTMLInputElement, 
         ref={ref}
         {...res}
       />
-      {error && error.length > 0 && <span className='text-xs mt-1 text-red-600'>{error}</span>}
+      {error && error.length > 0 ? (
+        <span className='text-xs mt-1 text-red-600'>{error}</span>
+      ) : (
+        <div className='h-8'></div>
+      )}
       {required && <BsAsterisk size={7} color='red' className='absolute top-4 right-3' />}
     </div>
   )

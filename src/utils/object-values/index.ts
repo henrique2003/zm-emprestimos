@@ -1,0 +1,5 @@
+export * from './cpf'
+export * from './telefone'
+export * from './celular'
+export * from './email'
+export * from './rg'

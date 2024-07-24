@@ -1,3 +1,3 @@
-export type FormError<T> = {
+export type IFormError<T> = {
   [key in keyof T]: string;
 };

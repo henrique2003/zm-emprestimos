@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react'
+import { IFormError } from '@/utils/forms/types'
+import { ChangeEvent, FormEvent } from 'react'
 
 export type CadastroDadosForm = {
   nomeCompleto: string
@@ -24,6 +25,8 @@ export type CadastroDadosForm = {
 }
 
 export type CadastroDadosViewModelReturn = {
-  handleChangeFormData: (e: ChangeEvent<HTMLInputElement>) => void
-  formData: CadastroDadosForm
+  handleChangeCadastrarDadosForm: (e: ChangeEvent<HTMLInputElement>) => void
+  handleSubmitCadastroDadosForm(e: FormEvent): Promise<void>
+  cadastrarDadosform: CadastroDadosForm
+  formErros: IFormError<CadastroDadosForm>
 }
