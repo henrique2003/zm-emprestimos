@@ -3,6 +3,9 @@ import { CadastroDadosForm, CadastroDadosViewModelReturn } from './cadastro-dado
 import { IFormError } from '@/utils/forms/types'
 import { validateCadastrarDadosForm } from '@/utils/forms/validations/simulacao/validate-cadastrar-dados-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { HashcoopService } from '@/services/hashcoop-service'
+
+const hashcoopService = new HashcoopService()
 
 export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
   const [cadastrarDadosform, setCadastrarDadosform] = useState<CadastroDadosForm>({
@@ -82,10 +85,12 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
     }
 
     const valorSolicitado = searchParams.get('valor')
+    if (!valorSolicitado) {
+      return alert('Valor solicitado em branco')
+    }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const data = {
-      valorSolicitado,
+      valorSolicitado: parseFloat(valorSolicitado),
       ...validate.data
     }
 
@@ -111,6 +116,11 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
       comprovanteRenda: '',
       documentos: ''
     })
+
+    const result = await hashcoopService.cadastrar(data)
+    if (!result.ok) {
+      return alert('Erro ao fazer o cadastro')
+    }
 
     navigate('/confirmacao-solicitacao')
   }
