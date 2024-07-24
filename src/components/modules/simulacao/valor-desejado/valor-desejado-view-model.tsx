@@ -33,7 +33,7 @@ export const useValorDesejadoViewModel = (): ValorDesejadoViewModelReturn => {
       return
     }
 
-    navigate('/cadastrar-dados')
+    navigate(`cadastrar-dados?valor=${validate.data.valor}`)
   }
 
   return {

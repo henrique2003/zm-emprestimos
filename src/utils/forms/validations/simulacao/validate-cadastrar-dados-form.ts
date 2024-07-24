@@ -2,7 +2,7 @@ import { CadastroDadosForm } from '@/components/modules/simulacao/cadastro-dados
 import { IFormError } from '../../types';
 import { IFormResult } from '../../types/form-result';
 import { FormResult } from '../../core';
-import { Celular, Cpf, Email, Rg, Telefone } from '@/utils/object-values';
+import { Celular, Cep, Cpf, Email, Rg, Telefone } from '@/utils/object-values';
 
 export const validateCadastrarDadosForm = (data: CadastroDadosForm): IFormResult<CadastroDadosForm> => {
   const errors: IFormError<CadastroDadosForm> = {
@@ -68,6 +68,14 @@ export const validateCadastrarDadosForm = (data: CadastroDadosForm): IFormResult
 
   if (data.numero === null) {
     errors.numero = 'Número é obrigatório';
+  }
+
+  if (data.cep && data.cep.trim().length > 0) {
+    data.cep = Cep.limpar(data.cep)
+
+    if (!Cep.validar(data.cep)) {
+      errors.cep = 'Cep inválido'
+    }
   }
 
   if (!data.cidade.trim()) {

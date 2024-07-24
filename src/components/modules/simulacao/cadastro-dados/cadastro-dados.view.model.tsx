@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { CadastroDadosForm, CadastroDadosViewModelReturn } from './cadastro-dados.types'
 import { IFormError } from '@/utils/forms/types'
 import { validateCadastrarDadosForm } from '@/utils/forms/validations/simulacao/validate-cadastrar-dados-form'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
   const [cadastrarDadosform, setCadastrarDadosform] = useState<CadastroDadosForm>({
@@ -50,6 +51,9 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
     documentos: ''
   })
 
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+
   function handleChangeCadastrarDadosForm(e: ChangeEvent<HTMLInputElement>): void {
     if (e.target.files) {
       return setCadastrarDadosform(prevState => {
@@ -77,6 +81,14 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
       return
     }
 
+    const valorSolicitado = searchParams.get('valor')
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const data = {
+      valorSolicitado,
+      ...validate.data
+    }
+
     setFormErrors({
       nomeCompleto: '',
       cpf: '',
@@ -99,6 +111,8 @@ export const useCadastroDadosViewModel = (): CadastroDadosViewModelReturn => {
       comprovanteRenda: '',
       documentos: ''
     })
+
+    navigate('/confirmacao-solicitacao')
   }
 
   return {
